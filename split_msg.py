@@ -1,4 +1,3 @@
-#!./venv/bin/python
 """Script to split origianl html into fixed length fragments"""
 
 from config import DEFAULT_MAX_LEN, DEFAULT_FILE_PATH
