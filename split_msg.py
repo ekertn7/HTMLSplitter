@@ -1,4 +1,4 @@
-"""Script to split origianl html into fixed length fragments"""
+"""Script to split original html into fixed length fragments"""
 
 from config import DEFAULT_MAX_LEN, DEFAULT_FILE_PATH
 from app.argument_parser.argument_parser import parse_command_line_arguments

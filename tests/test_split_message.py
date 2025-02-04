@@ -1,6 +1,7 @@
 """Tests of `split_message` function"""
 
 import pytest
+from config import DEFAULT_FILE_PATH
 from app.html_splitter.html_splitter import split_message
 from app.exceptions.exceptions import ImpossibleToSplitMessageException
 
@@ -8,7 +9,7 @@ from app.exceptions.exceptions import ImpossibleToSplitMessageException
 @pytest.fixture(scope='function', autouse=False, name='source')
 def prepare_source():
     """Fixture that read source file before tests"""
-    with open('source.html', 'r', encoding='utf-8') as file:
+    with open(DEFAULT_FILE_PATH, 'r', encoding='utf-8') as file:
         source = file.read()
     return source
 
