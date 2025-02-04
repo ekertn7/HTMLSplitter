@@ -2,8 +2,9 @@
 """Script to split origianl html into fixed length fragments"""
 
 from config import DEFAULT_MAX_LEN, DEFAULT_FILE_PATH
-from argument_parser.argument_parser import parse_command_line_arguments
-from html_splitter.html_splitter import split_message
+from app.argument_parser.argument_parser import parse_command_line_arguments
+from app.html_splitter.html_splitter import split_message
+from app.exceptions.exceptions import SplitterException
 
 
 def main():
@@ -25,4 +26,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SplitterException as exc:
+        print(exc)

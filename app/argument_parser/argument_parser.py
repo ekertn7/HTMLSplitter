@@ -28,4 +28,6 @@ def parse_command_line_arguments(
                         default=default_file_path,
                         help='Choice file path')
 
-    return parser.parse_args(sys.argv[1:])
+    namespace = parser.parse_args(sys.argv[1:])
+
+    return namespace

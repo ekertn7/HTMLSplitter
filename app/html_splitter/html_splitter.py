@@ -3,6 +3,7 @@
 import re
 from typing import Generator
 from collections import Counter
+from app.exceptions.exceptions import ImpossibleToSplitMessageException
 
 
 POSSIBLE_BLOCK_TAGS = ['p', 'b', 'strong', 'i', 'ul', 'ol', 'div', 'span']
@@ -95,9 +96,11 @@ def split_message(source: str, max_len: int) -> Generator[str]:
     """
 
     source = re.sub(r'\n+', '\n', source)  # remove double \n
-    source = re.sub(r'\n$', '', source)  # remove last \n
 
     source_elements = re.findall(r'(.+\n)', source)
+
+    if max_len < (max(len(chunk) for chunk in source_elements) + 50):
+        raise ImpossibleToSplitMessageException()
 
     accumulator = ''
     prefix = ''
@@ -112,6 +115,8 @@ def split_message(source: str, max_len: int) -> Generator[str]:
         if not (len(accumulator) + len(chunk) + len(postfix) <= max_len) or \
                 (idx + 1 == len(source_elements)):
             result = _remove_empty_tags(accumulator + postfix)
+            result = re.sub(r'^\n', '', result)  # remove first \n
+            result = re.sub(r'\n$', '', result)  # remove last \n
             if len(result) != 0:
                 yield result
                 accumulator = prefix
