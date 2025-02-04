@@ -1,13 +1,13 @@
-"""Argument parser"""
+"""Module with function to parse command line arguments"""
 
 import sys
 import argparse
 
 
-def create_argument_parser(
+def parse_command_line_arguments(
         default_max_len: int, default_file_path: str
     ) -> argparse.ArgumentParser:
-    """Creates argument parser using argparse
+    """Creates argument parser using argparse and returns namespace
 
     Args:
       --max-len [max_len]
@@ -16,7 +16,7 @@ def create_argument_parser(
         Positional argumnet to choice file path
 
     Returns:
-        An argparse argument parser object with arguments
+        Namespace with parsed arguments
     """
     parser = argparse.ArgumentParser()
 
